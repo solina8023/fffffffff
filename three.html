@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul id="list">
+			<li>
+				<input type="button" value="-">
+				<strong>0</strong>
+				<input type="button" value="+">
+				单价：<em>12.5元</em>
+				小计：<span>0元</span>
+			</li>
+			<li>
+				<input type="button" value="-">
+				<strong>0</strong>
+				<input type="button" value="+">
+				单价：<em>15.5元</em>
+				小计：<span>0元</span>
+			</li>
+			<li>
+			<input type="button" value="-">
+				<strong>0</strong>
+				<input type="button" value="+">
+				单价：<em>11元</em>
+				小计：<span>0元</span></li>
+			<li>
+				<input type="button" value="-">
+				<strong>0</strong>
+				<input type="button" value="+">
+				单价：<em>10元</em>
+				小计：<span>0元</span>
+			</li>
+			<li>
+				<input type="button" value="-">
+				<strong>0</strong>
+				<input type="button" value="+">
+				单价：<em>8.5元</em>
+				小计：<span>0元</span></li>
+			<li>
+				<input type="button" value="-">
+				<strong>0</strong>
+				<input type="button" value="+">
+				单价：<em>2.5元</em>
+				小计：<span>0元</span>
+			</li>
+		</ul>
+		<div>商品合计共：<p></p></div>
+		<div><p>其中最贵的商品单价是：</p></div>
+		<script>
+			/*
+			 1、尽量保证HTML代码结构一致，可以通过父级选取子元素；
+			 2、把核心主程序实现，用函数包起来；
+			 3、把每组里不同的值找出来，通过传参实现；
+			 */
+			var ul = document.getElementById('list'); 
+			var lis = ul.getElementsByTagName('li');
+			//第二部，把核心主程序实现，用函数包起来；
+			
+			fn1(lis[0]);//即把第一个li放到fn1()里；
+			fn1(lis[1]);//第二个。。。多个的时候，考虑循环，
+			for(var i=0;i<lis.length;i++){
+				fn1(lis[i]);//把函数放到循环里，把第几个的数值换成i就可以了；
+			}
+			function fn1(oli){
+				var buts = oli.getElementsByTagName('input')
+				var strongs = oli.getElementsByTagName('strong')[0];
+				var ems = oli.getElementsByTagName('em')[0];
+				var spans = oli.getElementsByTagName('span')[0];
+				//设置一个变量，即让strong里的内容可以发生改变，不仅仅是我们提前预设好的0元；
+				var n1 = Number(strongs.innerHTML);//这样写得到的是一个字符串
+				var n2 = parseFloat(ems.innerHTML);//这样写得到的是一个字符串
+				buts[1].onclick = function(){
+					n1++;
+					strongs.innerHTML = n1;
+					spans.innerHTML = n1*n2+'元';//parseFloat已经把元去掉了；
+				}
+				buts[0].onclick = function(){
+					n1--;
+					if(n1<0){
+					n1=0;	
+					}
+					strongs.innerHTML = n1;
+					spans.innerHTML = n1*n2+'元';//parseFloat已经把元去掉了；
+				}
+			}
+		</script>
+	</body>
+</html>
